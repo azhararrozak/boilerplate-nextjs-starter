@@ -1,11 +1,20 @@
-import { Chrome, Github } from "lucide-react";
 import Link from "next/link";
+import SocialLoginButton from "@/components/auth/SocialLoginButton";
+import { getSession } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Masuk | Boilerplate Starter",
 };
 
-export default function LoginPage() {
+export default async function LoginPage() {
+
+  const session = await getSession();
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="space-y-8">
       <div className="space-y-2 text-center">
@@ -19,20 +28,7 @@ export default function LoginPage() {
       </div>
 
       <div className="space-y-3">
-        <button
-          type="button"
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
-        >
-          <Chrome className="h-4 w-4" aria-hidden />
-          <span>Masuk dengan Google</span>
-        </button>
-        <button
-          type="button"
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100"
-        >
-          <Github className="h-4 w-4" aria-hidden />
-          <span>Masuk dengan GitHub</span>
-        </button>
+        <SocialLoginButton />
       </div>
 
       <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { SignOutButton } from "@/components/auth/SignOutButton";
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default async function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-100">
       <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80">
@@ -19,12 +20,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             >
               Beranda
             </Link>
-            <Link
-              href="/login"
-              className="rounded-full bg-zinc-900 px-4 py-2 text-white transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
-            >
-              Keluar
-            </Link>
+            <SignOutButton />
           </nav>
         </div>
       </header>
