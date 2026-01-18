@@ -21,7 +21,7 @@ export const auth = betterAuth({
     enabled: true,
     sendResetPassword: async ({ user, url }) => {
       resend.emails.send({
-        from: "azhardrozak2001@gmail.com",
+        from: "azhararrozak@satudev.id",
         to: user.email,
         subject: "Reset your password",
         react: ResetPasswordEmail({ username: user.name, resetUrl: url, userEmail: user.email}),
@@ -30,7 +30,7 @@ export const auth = betterAuth({
     onPasswordReset: async ({ user }) => {
       // your logic here
       console.log(`Password for user ${user.email} has been reset.`);
-      
+
     },
   },
   socialProviders: {
