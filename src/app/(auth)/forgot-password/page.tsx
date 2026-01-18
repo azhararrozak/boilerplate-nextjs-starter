@@ -1,35 +1,24 @@
 import Link from "next/link";
-import SocialLoginButton from "@/components/auth/SocialLoginButton";
-import FormSignIn from "@/components/forms/FormSignIn";
+import FormForgotPassword from "@/components/forms/ForgotPasswordForm";
 
 export const metadata = {
-  title: "Masuk | Boilerplate Starter",
+  title: "Forgot Password | Boilerplate Starter",
 };
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-2 text-center">
         <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
           Auth
         </p>
-        <h1 className="text-2xl font-bold tracking-tight">Masuk ke akun</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Lupa Kata Sandi</h1>
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
-          Gunakan email dan kata sandi untuk melanjutkan.
+          Masukkan email Anda untuk mereset kata sandi.
         </p>
       </div>
 
-      <div className="space-y-3">
-        <SocialLoginButton />
-      </div>
-
-      <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
-        <span className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
-        <span>atau</span>
-        <span className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
-      </div>
-
-      <FormSignIn />
+      <FormForgotPassword />
 
       <div className="flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-400">
         <span>Belum punya akun?</span>

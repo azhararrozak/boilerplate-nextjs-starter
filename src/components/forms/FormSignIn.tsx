@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { toast } from "sonner";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().min(1, "Email wajib diisi").email("Email tidak valid"),
@@ -86,6 +87,15 @@ const FormSignIn = () => {
               )}
             />
           </div>
+          <div className="text-right text-sm">
+            <Link
+              href="/forgot-password"
+              className="font-medium text-zinc-900 underline underline-offset-4 transition hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
+            >
+              Lupa kata sandi?
+            </Link>
+          </div>
+          
           <button
             className="flex w-full items-center justify-center rounded-lg bg-zinc-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
             type="submit"

@@ -4,17 +4,34 @@ import { headers } from "next/headers";
 
 import { db } from "@/db";
 import { nextCookies } from "better-auth/next-js";
+import { Resend } from "resend";
+import ResetPasswordEmail from "@/components/emails/ResetPassword";
+
+const resend = new Resend(process.env.RESEND_API_KEY as string);
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL as string,
   database: drizzleAdapter(db, {
-    provider: "pg", // or "pg" or "mysql"
+    provider: "pg",
   }),
-  pages:{
+  pages: {
     signIn: "/login",
   },
   emailAndPassword: {
     enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      resend.emails.send({
+        from: "azhardrozak2001@gmail.com",
+        to: user.email,
+        subject: "Reset your password",
+        react: ResetPasswordEmail({ username: user.name, resetUrl: url, userEmail: user.email}),
+      });
+    },
+    onPasswordReset: async ({ user }) => {
+      // your logic here
+      console.log(`Password for user ${user.email} has been reset.`);
+      
+    },
   },
   socialProviders: {
     github: {
@@ -29,6 +46,7 @@ export const auth = betterAuth({
   plugins: [nextCookies()],
 });
 
-export const getSession = async () => auth.api.getSession({
-  headers: await headers(),
-});
+export const getSession = async () =>
+  auth.api.getSession({
+    headers: await headers(),
+  });
