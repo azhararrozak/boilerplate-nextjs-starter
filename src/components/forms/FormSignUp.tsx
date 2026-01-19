@@ -55,8 +55,8 @@ const FormSignUp = () => {
     const { success, message } = result;
 
     if (success) {
-      toast.success("Berhasil daftar!");
-      router.push("/dashboard");
+      toast.success("Berhasil daftar! Silakan cek email Anda untuk verifikasi.");
+      router.push("/login");
     } else {
       toast.error(message as string);
     }
