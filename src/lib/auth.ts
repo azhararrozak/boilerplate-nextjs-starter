@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { headers } from "next/headers";
-
+import { organization, admin } from "better-auth/plugins";
 import { db } from "@/db";
 import { nextCookies } from "better-auth/next-js";
 import { Resend } from "resend";
@@ -66,7 +66,9 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
-  plugins: [nextCookies()],
+  plugins: [nextCookies(), organization(), admin({
+    defaultRole: "user",
+  })],
 });
 
 export const getSession = async () =>
