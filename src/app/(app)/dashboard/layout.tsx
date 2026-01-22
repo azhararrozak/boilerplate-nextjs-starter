@@ -10,7 +10,6 @@ export default async function DashboardLayout({
 }: {
   children: ReactNode;
 }) {
-  // Pengecekan session
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -25,7 +24,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-100">
+    <>
       <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/80">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2 text-sm font-semibold">
@@ -75,6 +74,6 @@ export default async function DashboardLayout({
 
         <section className="flex-1 space-y-6">{children}</section>
       </main>
-    </div>
+    </>
   );
 }

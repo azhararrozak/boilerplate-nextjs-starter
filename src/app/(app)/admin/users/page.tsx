@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import {
   Table,
   TableBody,
@@ -13,7 +14,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { UserActions } from "@/components/admin/UserActions";
 
-const AdminPage = async () => {
+export const metadata = {
+  title: "User Management | Admin",
+};
+
+const AdminUsersPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -24,7 +29,7 @@ const AdminPage = async () => {
   if (session.user.role !== "admin") {
     return redirect("/dashboard");
   }
-  
+
   const hasAccess = await auth.api.userHasPermission({
     headers: await headers(),
     body: { permission: { user: ["list"] } },
@@ -39,7 +44,7 @@ const AdminPage = async () => {
     query: {
       limit: 100,
       sortBy: "createdAt",
-      sortOrder: "desc",
+      // sortOrder: "desc",
     },
   });
 
@@ -54,10 +59,17 @@ const AdminPage = async () => {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight">User Management</h1>
+        <p className="text-sm text-zinc-600 dark:text-zinc-400">
+          Kelola semua pengguna di sistem
+        </p>
+      </div>
+
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">User Management</CardTitle>
+          <CardTitle className="text-xl font-bold">All Users</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="rounded-md border">
@@ -75,7 +87,10 @@ const AdminPage = async () => {
                   users.users.map((user) => (
                     <TableRow key={user.id}>
                       <TableCell>
-                        <div className="flex items-center gap-3">
+                        <Link
+                          href={`/admin/users/${user.id}`}
+                          className="flex items-center gap-3 hover:underline"
+                        >
                           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-semibold">
                             {user.name[0].toUpperCase()}
                           </div>
@@ -85,7 +100,7 @@ const AdminPage = async () => {
                               {user.email}
                             </span>
                           </div>
-                        </div>
+                        </Link>
                       </TableCell>
                       <TableCell>
                         <Badge
@@ -118,4 +133,4 @@ const AdminPage = async () => {
   );
 };
 
-export default AdminPage;
+export default AdminUsersPage;
