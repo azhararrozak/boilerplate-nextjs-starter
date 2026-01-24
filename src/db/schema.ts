@@ -187,3 +187,111 @@ export const invitationRelations = relations(invitation, ({ one }) => ({
     references: [user.id],
   }),
 }));
+
+// Subscription Plans Table
+export const subscriptionPlan = pgTable("subscription_plan", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  price: text("price").notNull(), // Store as string to avoid precision issues
+  interval: text("interval").notNull(), // 'monthly', 'yearly'
+  features: text("features"), // JSON stringified array
+  isActive: boolean("is_active").default(true).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
+// User Subscriptions Table
+export const subscription = pgTable(
+  "subscription",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    planId: text("plan_id")
+      .notNull()
+      .references(() => subscriptionPlan.id),
+    status: text("status").notNull().default("inactive"), // 'active', 'inactive', 'cancelled', 'expired'
+    startDate: timestamp("start_date"),
+    endDate: timestamp("end_date"),
+    cancelledAt: timestamp("cancelled_at"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [index("subscription_userId_idx").on(table.userId)],
+);
+
+// Payment Transactions Table
+export const paymentTransaction = pgTable(
+  "payment_transaction",
+  {
+    id: text("id").primaryKey(),
+    subscriptionId: text("subscription_id")
+      .notNull()
+      .references(() => subscription.id, { onDelete: "cascade" }),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    amount: text("amount").notNull(),
+    currency: text("currency").default("IDR").notNull(),
+    status: text("status").notNull().default("pending"), // 'pending', 'success', 'failed', 'expired'
+    midtransOrderId: text("midtrans_order_id"),
+    midtransTransactionId: text("midtrans_transaction_id"),
+    paymentType: text("payment_type"),
+    transactionTime: timestamp("transaction_time"),
+    settlementTime: timestamp("settlement_time"),
+    metadata: text("metadata"), // JSON stringified additional data
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => /* @__PURE__ */ new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("payment_transaction_subscriptionId_idx").on(table.subscriptionId),
+    index("payment_transaction_userId_idx").on(table.userId),
+  ],
+);
+
+// Relations for subscription tables
+export const subscriptionPlanRelations = relations(
+  subscriptionPlan,
+  ({ many }) => ({
+    subscriptions: many(subscription),
+  }),
+);
+
+export const subscriptionRelations = relations(
+  subscription,
+  ({ one, many }) => ({
+    user: one(user, {
+      fields: [subscription.userId],
+      references: [user.id],
+    }),
+    plan: one(subscriptionPlan, {
+      fields: [subscription.planId],
+      references: [subscriptionPlan.id],
+    }),
+    transactions: many(paymentTransaction),
+  }),
+);
+
+export const paymentTransactionRelations = relations(
+  paymentTransaction,
+  ({ one }) => ({
+    subscription: one(subscription, {
+      fields: [paymentTransaction.subscriptionId],
+      references: [subscription.id],
+    }),
+    user: one(user, {
+      fields: [paymentTransaction.userId],
+      references: [user.id],
+    }),
+  }),
+);

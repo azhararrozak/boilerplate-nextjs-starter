@@ -58,10 +58,10 @@ export default async function DashboardLayout({
               Ikhtisar
             </Link>
             <Link
-              href="/dashboard/projects"
+              href="/dashboard/subscription"
               className="block rounded-lg px-3 py-2 text-zinc-500 transition hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
             >
-              Proyek (placeholder)
+              Subscription
             </Link>
             <Link
               href="/dashboard/settings"
