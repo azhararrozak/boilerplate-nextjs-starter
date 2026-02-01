@@ -1,127 +1,214 @@
-import Link from "next/link";
-
-const features = [
-  {
-    title: "App Router siap pakai",
-    description: "Struktur terpisah untuk halaman publik, auth, dan dashboard.",
-  },
-  {
-    title: "UI berbasis Tailwind",
-    description:
-      "Kelas utilitas ringan dengan komponen siap pakai di folder components/ui.",
-  },
-  {
-    title: "Siap dikembangkan",
-    description: "Mulai kembangkan fitur Anda tanpa pusing setup awal.",
-  },
-];
+import BottomNavbar from "@/components/bottom-navbar";
+import { Heart } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-b from-zinc-50 via-white to-zinc-100 text-zinc-900 dark:from-black dark:via-zinc-950 dark:to-black">
-      <header className="flex items-center justify-between px-6 py-4 md:px-12">
-        <div className="flex items-center gap-2 text-lg font-semibold tracking-tight">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-900 text-white dark:bg-zinc-100 dark:text-black">
-            B
-          </span>
-          <span>Boilerplate Starter</span>
-        </div>
-        <div className="flex items-center gap-3 text-sm font-medium">
-          <Link
-            href="/login"
-            className="rounded-full px-4 py-2 text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-900"
-          >
-            Masuk
-          </Link>
-          <Link
-            href="/register"
-            className="rounded-full bg-zinc-900 px-4 py-2 text-white shadow-sm transition hover:bg-zinc-700 dark:bg-zinc-50 dark:text-black dark:hover:bg-zinc-200"
-          >
-            Daftar
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-b from-rose-50 via-pink-50 to-white">
+      {/* Mobile-First Container - Centered on Desktop */}
+      <div className="mx-auto max-w-[430px] min-h-screen bg-white shadow-2xl">
+        {/* Hero Section */}
+        <section
+          id="home"
+          className="relative min-h-screen flex flex-col items-center justify-center px-6 py-16 bg-gradient-to-br from-rose-100 via-pink-50 to-white"
+        >
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmYjdxODUiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE4YzAtOS45NC04LjA2LTE4LTE4LTE4UzAgOC4wNiAwIDE4czguMDYgMTggMTggMThjNC45NyAwIDkuNDgtMiAxMi43My01LjIzQzMzLjk3IDI3LjQ4IDM2IDIzLjAzIDM2IDE4eiIvPjwvZz48L2c+PC9zdmc+')] opacity-40"></div>
 
-      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-12 px-6 py-12 md:py-20">
-        <section className="grid gap-10 md:grid-cols-2 md:items-center">
-          <div className="space-y-6">
-            <p className="inline-flex items-center rounded-full bg-zinc-900 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white shadow-sm dark:bg-zinc-100 dark:text-black">
-              Next.js 15 App Router
-            </p>
-            <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              Pondasi cepat untuk produk Anda.
-            </h1>
-            <p className="text-lg text-zinc-600 dark:text-zinc-300">
-              Landing page, alur otentikasi, dan dashboard sudah dipisah rapi.
-              Tinggal lanjutkan pengembangan sesuai kebutuhan bisnis Anda.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                href="/dashboard"
-                className="rounded-full bg-zinc-900 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-zinc-900/10 transition hover:-translate-y-0.5 hover:bg-zinc-700 dark:bg-zinc-50 dark:text-black dark:shadow-zinc-900/30 dark:hover:bg-zinc-200"
-              >
-                Lihat Dashboard
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-full px-5 py-3 text-sm font-semibold text-zinc-800 underline underline-offset-4 transition hover:text-zinc-500 dark:text-zinc-200 dark:hover:text-zinc-400"
-              >
-                Mulai Gratis
-              </Link>
+          <div className="relative text-center space-y-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-rose-500 text-white mb-4 shadow-lg shadow-rose-500/30 animate-pulse">
+              <Heart size={32} fill="currentColor" />
             </div>
-            <div className="flex flex-wrap gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                🚀 Deploy cepat
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                🔒 Siap auth
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
-                📦 Modular
-              </span>
-            </div>
-          </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-zinc-200 bg-white p-6 shadow-xl shadow-zinc-900/5 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-none">
-            <div className="absolute inset-0 bg-gradient-to-br from-zinc-100 via-white to-zinc-50 opacity-80 dark:from-zinc-800/50 dark:via-zinc-900 dark:to-black" />
-            <div className="relative grid gap-4 text-sm">
-              <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
-                <p className="text-xs font-semibold text-zinc-500">Grouping</p>
-                <pre className="mt-2 overflow-x-auto rounded-md bg-zinc-900 p-3 text-xs text-zinc-100 shadow-inner">{`src/app/
-├─ (marketing)/page.tsx
-├─ (auth)/layout.tsx
-│  ├─ login/page.tsx
-│  └─ register/page.tsx
-└─ (dashboard)/layout.tsx
-   └─ dashboard/page.tsx`}</pre>
-              </div>
-              <div className="rounded-xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-700 dark:bg-zinc-800">
-                <p className="text-xs font-semibold text-zinc-500">
-                  Siap dikembangkan
-                </p>
-                <p className="mt-2 text-zinc-700 dark:text-zinc-200">
-                  Gunakan folder components/ui untuk membangun form login,
-                  tabel, atau grafik sesuai kebutuhan produk Anda.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid gap-6 md:grid-cols-3">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="rounded-xl border border-zinc-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-zinc-900/10 dark:border-zinc-800 dark:bg-zinc-900"
-            >
-              <h3 className="text-lg font-semibold">{feature.title}</h3>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-300">
-                {feature.description}
+            <div className="space-y-2">
+              <p className="text-sm text-rose-600 font-medium tracking-wider uppercase">
+                The Wedding Of
               </p>
+              <h1 className="text-5xl font-serif font-bold text-rose-900 tracking-tight">
+                Bride & Groom
+              </h1>
+              <div className="flex items-center justify-center gap-3 text-rose-700">
+                <div className="h-px w-12 bg-rose-300"></div>
+                <Heart
+                  size={16}
+                  fill="currentColor"
+                  className="text-rose-400"
+                />
+                <div className="h-px w-12 bg-rose-300"></div>
+              </div>
             </div>
-          ))}
+
+            <p className="text-lg text-rose-800 font-medium">
+              28 Februari 2026
+            </p>
+
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-rose-100">
+              <span className="text-sm text-rose-700">🎉</span>
+              <span className="text-sm font-medium text-rose-900">
+                Save The Date
+              </span>
+            </div>
+          </div>
         </section>
-      </main>
+
+        {/* Mempelai Section */}
+        <section id="mempelai" className="min-h-screen px-6 py-16 bg-white">
+          <div className="text-center space-y-8">
+            <div>
+              <h2 className="text-3xl font-serif font-bold text-rose-900 mb-2">
+                Mempelai
+              </h2>
+              <p className="text-rose-600 text-sm">Kedua Mempelai</p>
+            </div>
+
+            {/* Bride */}
+            <div className="space-y-4">
+              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-pink-300 shadow-xl flex items-center justify-center">
+                <span className="text-4xl">👰</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-serif font-bold text-rose-900">
+                  Nama Mempelai Wanita
+                </h3>
+                <p className="text-rose-700 mt-2">
+                  Putri dari Bapak ... & Ibu ...
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center gap-3">
+              <div className="h-px w-16 bg-rose-200"></div>
+              <Heart size={20} className="text-rose-400" fill="currentColor" />
+              <div className="h-px w-16 bg-rose-200"></div>
+            </div>
+
+            {/* Groom */}
+            <div className="space-y-4">
+              <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-rose-200 to-pink-300 shadow-xl flex items-center justify-center">
+                <span className="text-4xl">🤵</span>
+              </div>
+              <div>
+                <h3 className="text-2xl font-serif font-bold text-rose-900">
+                  Nama Mempelai Pria
+                </h3>
+                <p className="text-rose-700 mt-2">
+                  Putra dari Bapak ... & Ibu ...
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Acara Section */}
+        <section
+          id="acara"
+          className="min-h-screen px-6 py-16 bg-gradient-to-b from-rose-50 to-white"
+        >
+          <div className="text-center space-y-8">
+            <div>
+              <h2 className="text-3xl font-serif font-bold text-rose-900 mb-2">
+                Acara
+              </h2>
+              <p className="text-rose-600 text-sm">Waktu & Tempat</p>
+            </div>
+
+            {/* Akad */}
+            <div className="bg-white rounded-2xl p-6 shadow-xl border border-rose-100">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-rose-100 text-rose-600 mb-4">
+                <span className="text-2xl">📿</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-rose-900 mb-3">
+                Akad Nikah
+              </h3>
+              <div className="space-y-2 text-rose-700">
+                <p className="font-medium">Jumat, 28 Februari 2026</p>
+                <p>08:00 - 10:00 WIB</p>
+                <p className="text-sm mt-4">
+                  Gedung Serba Guna
+                  <br />
+                  Jl. Contoh No. 123, Jakarta
+                </p>
+              </div>
+            </div>
+
+            {/* Resepsi */}
+            <div className="bg-white rounded-2xl p-6 shadow-xl border border-rose-100">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-rose-100 text-rose-600 mb-4">
+                <span className="text-2xl">🎊</span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-rose-900 mb-3">
+                Resepsi
+              </h3>
+              <div className="space-y-2 text-rose-700">
+                <p className="font-medium">Jumat, 28 Februari 2026</p>
+                <p>11:00 - 14:00 WIB</p>
+                <p className="text-sm mt-4">
+                  Gedung Serba Guna
+                  <br />
+                  Jl. Contoh No. 123, Jakarta
+                </p>
+              </div>
+            </div>
+
+            <button className="w-full bg-rose-500 hover:bg-rose-600 text-white font-medium py-3 px-6 rounded-full shadow-lg shadow-rose-500/30 transition-all duration-300 hover:scale-105">
+              📍 Lihat Lokasi di Maps
+            </button>
+          </div>
+        </section>
+
+        {/* RSVP Section */}
+        <section id="rsvp" className="min-h-screen px-6 py-16 bg-white">
+          <div className="space-y-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-serif font-bold text-rose-900 mb-2">
+                RSVP
+              </h2>
+              <p className="text-rose-600 text-sm">Konfirmasi Kehadiran</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-rose-50 to-pink-50 rounded-2xl p-6 border border-rose-100">
+              <p className="text-rose-800 text-center mb-6">
+                Mohon konfirmasi kehadiran Anda di hari bahagia kami
+              </p>
+
+              <div className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Nama Lengkap"
+                  className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 outline-none transition-all"
+                />
+
+                <select className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 outline-none transition-all text-rose-900">
+                  <option>Apakah Anda akan hadir?</option>
+                  <option>Ya, saya akan hadir</option>
+                  <option>Maaf, saya tidak bisa hadir</option>
+                </select>
+
+                <input
+                  type="number"
+                  placeholder="Jumlah Tamu"
+                  min="1"
+                  className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 outline-none transition-all"
+                />
+
+                <textarea
+                  placeholder="Ucapan & Doa"
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-xl border border-rose-200 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 outline-none transition-all resize-none"
+                ></textarea>
+
+                <button className="w-full bg-rose-500 hover:bg-rose-600 text-white font-medium py-3 px-6 rounded-full shadow-lg shadow-rose-500/30 transition-all duration-300 hover:scale-105">
+                  Kirim Konfirmasi
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Extra padding for bottom navbar */}
+        <div className="h-32"></div>
+
+        {/* Bottom Navbar */}
+        <BottomNavbar />
+      </div>
     </div>
   );
 }
